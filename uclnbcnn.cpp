@@ -11,41 +11,25 @@ class USCLN_BSCNN
     void seta(int );
     void setb(int );
     void nhap();
-    int UCLN();
-    int BCNN();
+    int UCLN(int, int);
+    int BCNN(int, int);
 };
 USCLN_BSCNN :: USCLN_BSCNN(int a, int b)
 : a(a), b(b)
 {}
-int USCLN_BSCNN :: UCLN()
+int USCLN_BSCNN :: UCLN(int a, int b)
 {
-    // Nếu a = 0 => ucln(a,b) = b
-    // Nếu b = 0 => ucln(a,b) = a
-    int tmp0 = this->a, tmp1 = this->b;
-    if (tmp0 == 0 || tmp1 == 0){
-        return tmp0 + tmp1;
-    }
-    while (tmp0 != tmp1){
-        if (tmp0 > tmp1){
-            tmp0 -= tmp1; // a = a - b
-        }else{
-            tmp1 -= tmp0;
-        }
-    }
-    return tmp0; // return a or b, bởi vì lúc này a và b bằng nhau
+    // a = this->a;
+    // b = this->b;
+    if (b == 0) return a;
+    if (a % b == 0) return b;
+    return UCLN(b, a%b);
 }
-int USCLN_BSCNN :: BCNN()
+int USCLN_BSCNN :: BCNN(int a, int b)
 {
-    int lcm;
-    int maxV = a*b;
-    int tmp0 = this->a, tmp1 = this->b;
-    for(int i = std::max(tmp0, tmp1); i <= maxV; i++){
-        if(i % tmp0 == 0 && i % tmp1 == 0){
-            lcm = i;
-            break;
-        }
-    }
-    return lcm;
+    // a = this->a;
+    // b = this->b;
+    /*return (a * b) / USCLN_BSCNN :: UCLN(a, b);*/ return (a * b) / UCLN(a, b);
 }
 int USCLN_BSCNN :: geta()
 {
@@ -123,10 +107,10 @@ int main()
     xoa();
     break;
     case 6 :
-    cout<<"UCLN("<<a.geta()<<","<<a.getb()<<")"<<"="<<a.UCLN();
+    cout<<"UCLN("<<a.geta()<<","<<a.getb()<<")"<<"="<<a.UCLN(a.geta(), a.getb());
     dungroixoa();
     break;
-    case 7 : cout<<"BCNN("<<a.geta()<<","<<a.getb()<<")"<<"="<<a.BCNN();
+    case 7 : cout<<"BCNN("<<a.geta()<<","<<a.getb()<<")"<<"="<<a.BCNN(a.geta(), a.getb());
     dungroixoa();
     break;
     default: cout<<"Thoat chuong trinh!";
